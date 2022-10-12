@@ -26,6 +26,7 @@ public class MyWorld extends World
      */
     private void prepare()
     {
+
         Hero hero = new Hero();
         addObject(hero,30,198);
         hero.setLocation(62,208);
@@ -33,5 +34,18 @@ public class MyWorld extends World
         hero.setLocation(20,329);
         Enemy enemy = new Enemy();
         addObject(enemy,784,304);
+    }
+    public void addenemy(){
+        int enemyY= 10 + Greenfoot.getRandomNumber(580);
+        Enemy enemy = new Enemy(Greenfoot.getRandomNumber(8)+1);
+        addObject(enemy,800,enemyY);
+    }
+    int enemyCount = 0;
+    public void act(){
+        enemyCount++;
+        if (enemyCount==20){
+            addenemy();
+            enemyCount=0;
+        }
     }
 }

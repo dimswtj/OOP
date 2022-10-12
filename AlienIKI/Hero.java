@@ -16,24 +16,41 @@ public class Hero extends Actor
     {
         // Add your action code here.
         Heromove();
-        if(getX()==799)
-        setLocation(1,getY());
-        if(getX()==0)
-        setLocation(799,getY());
+        heroHit();
         if(getY()==599)
         setLocation(getX(),1);
         if(getY()==0)
         setLocation(getX(),599);
+        laserShoot();
     }
     public void Heromove()
     {
         if(Greenfoot.isKeyDown("W"))
-        setLocation(getX(), getY()-4);
+        setLocation(getX(), getY()-10);
         if(Greenfoot.isKeyDown("A"))
         setLocation(getX()-4, getY());
         if(Greenfoot.isKeyDown("S"))
-        setLocation(getX(), getY()+4);
+        setLocation(getX(), getY()+10);
         if(Greenfoot.isKeyDown("D"))
         setLocation(getX()+4, getY());
+    }
+    int laserCount=0;
+    public void laserShoot(){
+        laserCount++;
+        if(laserCount==10){
+            Laser laser = new Laser();
+            getWorld().addObject(laser, getX()+50,getY());
+            laserCount=0;
+        }
+    }
+    int heroCount = 0;
+    public void heroHit(){
+        if(isTouching(Enemy.class)){
+            removeTouching(Enemy.class);
+            Explode explode = new Explode();
+            getWorld().addObject(explode, getX(), getY());
+            heroCount++;
+            setLocation(30,198);
+        }
     }
 }

@@ -20,15 +20,22 @@ public class Enemy extends Actor
     
     public Enemy (int speed){
         setRotation(180);
-        speed = speed;
+        this.speed = speed;
     }
     public int speed = 4;
     public void act()
     {
         // Add your action code here.
-        move (4);
-        if(isAtEdge())
-        setLocation(800, getY());
         move(speed);
+        turn(70);
+        //if(isAtEdge())
+        setLocation(getX()-speed, getY());
+        enemyRemove();
     }
+    public void enemyRemove(){
+        if(getX()==0){
+            getWorld().removeObject(this);
+        }
+    }
+    
 }
